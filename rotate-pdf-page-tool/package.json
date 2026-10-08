@@ -1,0 +1,1 @@
+{"name":"rotate-pdf-page-tool","private":true,"version":"1.0.0","scripts":{"start":"node server.mjs"},"dependencies":{"pdf-lib":"^1.17.1"}}

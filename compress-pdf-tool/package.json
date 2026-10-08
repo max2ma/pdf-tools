@@ -1,0 +1,1 @@
+{"name":"compress-pdf-tool","private":true,"version":"1.0.0","type":"module","scripts":{"start":"node server.mjs"},"dependencies":{"pdf-lib":"^1.17.1","pdfjs-dist":"^4.10.38"}}
