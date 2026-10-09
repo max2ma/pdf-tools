@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f6">
+  <title>Stillframe | Photo cropper</title>
+  <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Stillframe home"><span class="brand-mark" aria-hidden="true"><i></i></span><span>stillframe</span></a>
+    <span class="privacy-note"><span class="lock-icon" aria-hidden="true">&#9679;</span> Your photos stay on this device</span>
+  </header>
+
+  <main class="app-shell">
+    <section class="heading-row">
+      <div>
+        <p class="eyebrow">PHOTO STUDIO <span></span> 01 / CROP</p>
+        <h1>Make it fit.</h1>
+        <p class="subheading">A clean, correctly sized photo for wherever life takes you.</p>
+      </div>
+      <button class="button button-quiet reset-button" id="resetButton" type="button" disabled><span aria-hidden="true">&#8634;</span> Reset</button>
+    </section>
+
+    <section class="workspace" aria-label="Photo crop editor">
+      <div class="editor-column">
+        <div class="stage-wrap">
+          <div class="stage" id="stage" aria-label="Photo crop area">
+            <div class="empty-state" id="emptyState">
+              <div class="upload-art" aria-hidden="true"><span class="art-sun"></span><span class="art-hill hill-one"></span><span class="art-hill hill-two"></span><span class="art-frame"></span></div>
+              <h2>Your photo goes here</h2>
+              <p>Choose a clear, well-lit image to get started.</p>
+              <button class="button button-primary" id="chooseButton" type="button"><span aria-hidden="true">&#8593;</span> Choose a photo</button>
+              <span class="file-types">JPG, PNG or WEBP · up to 25 MB</span>
+            </div>
+            <img id="photo" alt="Photo being cropped" draggable="false" hidden>
+            <div class="crop-window" id="cropWindow" hidden aria-label="Crop window. Drag the photo to reposition it.">
+              <span class="crop-grid" aria-hidden="true"></span>
+              <span class="crop-corner corner-tl"></span><span class="crop-corner corner-tr"></span>
+              <span class="crop-corner corner-bl"></span><span class="crop-corner corner-br"></span>
+            </div>
+            <div class="stage-hint" id="stageHint" hidden><span aria-hidden="true">&#10021;</span> Drag to reposition</div>
+            <input class="file-input" id="fileInput" type="file" accept="image/jpeg,image/png,image/webp">
+          </div>
+        </div>
+        <div class="editor-footer">
+          <button class="button button-quiet replace-button" id="replaceButton" type="button" hidden><span aria-hidden="true">&#8635;</span> Replace photo</button>
+          <div class="zoom-control" id="zoomControl" hidden>
+            <span class="zoom-icon" aria-hidden="true">&#8722;</span>
+            <input id="zoomSlider" type="range" min="100" max="250" value="100" aria-label="Zoom">
+            <span class="zoom-icon" aria-hidden="true">+</span>
+            <output id="zoomValue">100%</output>
+          </div>
+          <button class="button button-quiet rotate-button" id="rotateButton" type="button" hidden aria-label="Rotate photo 90 degrees clockwise" title="Rotate photo"><span aria-hidden="true">&#8635;</span></button>
+        </div>
+      </div>
+
+      <aside class="settings-panel" aria-label="Crop settings">
+        <div class="panel-section size-section">
+          <div class="section-title"><span class="step">01</span><h2>Choose a size</h2></div>
+          <label class="field-label" for="presetSelect">PHOTO FORMAT</label>
+          <div class="select-wrap"><select id="presetSelect">
+            <option value="passport">Passport · 35 × 45 mm</option>
+            <option value="usvisa">US visa · 2 × 2 in</option>
+            <option value="id">ID photo · 30 × 40 mm</option>
+            <option value="wallet">Wallet · 2.5 × 3.5 in</option>
+            <option value="4x6">Print · 4 × 6 in</option>
+            <option value="square">Square · 1 × 1 in</option>
+            <option value="custom">Custom dimensions</option>
+          </select><span class="select-chevron" aria-hidden="true">&#8964;</span></div>
+          <div class="custom-fields" id="customFields" hidden>
+            <label><span>Width (mm)</span><input id="customWidth" type="number" min="10" max="300" value="35"></label>
+            <span class="dimension-x">×</span>
+            <label><span>Height (mm)</span><input id="customHeight" type="number" min="10" max="300" value="45"></label>
+          </div>
+          <div class="format-summary"><span class="summary-icon" aria-hidden="true">&#9638;</span><div><strong id="formatName">Passport photo</strong><span id="formatDetail">35 × 45 mm <i>·</i> 3:4.9 ratio</span></div></div>
+        </div>
+
+        <div class="panel-section output-section">
+          <div class="section-title"><span class="step">02</span><h2>Output quality</h2></div>
+          <label class="field-label" for="qualitySelect">RESOLUTION</label>
+          <div class="select-wrap"><select id="qualitySelect"><option value="300">Print · 300 DPI</option><option value="200">Standard · 200 DPI</option><option value="150">Web · 150 DPI</option></select><span class="select-chevron" aria-hidden="true">&#8964;</span></div>
+          <div class="output-size"><span>Export dimensions</span><strong id="pixelSize">413 × 531 px</strong></div>
+        </div>
+
+        <button class="button button-export" id="exportButton" type="button" disabled><span>Download photo</span><span class="download-icon" aria-hidden="true">&#8595;</span></button>
+        <p class="panel-footnote"><span aria-hidden="true">&#10003;</span> Ready to print or upload</p>
+      </aside>
+    </section>
+    <footer class="page-footer"><span>STILLFRAME PHOTO TOOLS</span><span>Simple by design. Private by default.</span></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="src/cropper.js" defer></script>
+</body>
+</html>
